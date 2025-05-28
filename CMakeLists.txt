@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
-project(minidump 
-    VERSION 1.0.0 
+project(minidump
+    VERSION 1.0.0
     DESCRIPTION "Portable C++17 Windows minidump file parser library"
     LANGUAGES CXX
 )
@@ -40,7 +40,7 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
 # Set release optimizations
-target_compile_definitions(minidump PRIVATE 
+target_compile_definitions(minidump PRIVATE
     $<$<CONFIG:Release>:NDEBUG>
 )
 
@@ -59,15 +59,15 @@ endif()
 # Tests (only when building as main project)
 if(MINIDUMP_BUILD_TESTS)
     enable_testing()
-    
+
     # Define test data paths
     set(TEST_DATA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../dumps")
     set(TEST_DMP_FILE "${TEST_DATA_DIR}/StringEncryptionFun_x64.dmp")
 
     # Add basic parsing test
     if(TARGET parse_dump AND EXISTS "${TEST_DMP_FILE}")
-        add_test(NAME test_parse_dump 
-                 COMMAND parse_dump "${TEST_DMP_FILE}")
+        add_test(NAME test_parse_dump
+            COMMAND parse_dump "${TEST_DMP_FILE}")
     endif()
 
     # Custom target for running comparison tests (development only)
